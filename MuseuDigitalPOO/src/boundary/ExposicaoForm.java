@@ -15,25 +15,23 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import controller.ObraControl;
-import entity.Obra;
+import controller.ExposicaoControl;
+import entity.Exposicao;
 
-
-public class ObraForm implements ActionListener {
-
-	private JFrame janela = new JFrame("Gestão de Obras de Arte");
-	private JTextField txtNome = new JTextField();
-	private JTextField txtAutor = new JTextField();
-	private JTextField txtDisponivel = new JTextField();
-	private JTextField txtTipo = new JTextField();
+public class ExposicaoForm implements ActionListener {
+	
+	private JFrame janela = new JFrame("Gestão de Exposições");
+	private JTextField txtNomeExposicao = new JTextField();
+	private JTextField txtDataInicio = new JTextField();
+	private JTextField txtDataFim = new JTextField();
 	private JButton btnAdicionar = new JButton("Adicionar");
 	private JButton btnPesquisar = new JButton("Pesquisar");
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
-	private ObraControl controle = new ObraControl();
+	private ExposicaoControl controle = new ExposicaoControl();
 	
-	public ObraForm() { 
+	public ExposicaoForm() { 
 		JPanel panPrincipal = new JPanel( new BorderLayout() );
 		JPanel panForm = new JPanel( new GridLayout(6, 2) );
 		JScrollPane panTabela = new JScrollPane( );
@@ -42,14 +40,12 @@ public class ObraForm implements ActionListener {
 		panPrincipal.add( panForm, BorderLayout.NORTH );
 		panPrincipal.add( panTabela, BorderLayout.CENTER );
 		
-		panForm.add( new JLabel("Nome da Obra: ") );
-		panForm.add( txtNome );
-		panForm.add( new JLabel("Nome do Autor: ") );
-		panForm.add( txtAutor );
-		panForm.add( new JLabel("Disponível: ") );
-		panForm.add( txtDisponivel );
-		panForm.add( new JLabel("Tipo: ") );
-		panForm.add( txtTipo );
+		panForm.add( new JLabel("Nome da Exposição") );
+		panForm.add( txtNomeExposicao );
+		panForm.add( new JLabel("Data de Inicio") );
+		panForm.add( txtDataInicio );
+		panForm.add( new JLabel("Data de Fim") );
+		panForm.add( txtDataFim );
 		panForm.add( btnAdicionar );
 		panForm.add( btnPesquisar );
 		
@@ -62,31 +58,36 @@ public class ObraForm implements ActionListener {
 	}
 	
 	
-	public void obraToForm(Obra o) {
+	public void exposicaoToForm(Exposicao exp) {
 		SimpleDateFormat sdf = new SimpleDateFormat();
-		txtNome.setText(o.getNome());
-		txtAutor.setText(o.getAutor());
-		txtDisponivel.setText(o.getDisponivel());
-		txtTipo.setText(o.getTipo());
+		txtNomeExposicao.setText(exp.getNomeExposicao());
+		txtDataInicio.setText(sdf.format(exp.getDataInicio()));
+		txtDataFim.setText(sdf.format(exp.getDataFim()));
 	}
 	
-	public Obra formToObra() { 
-		Obra o = new Obra();
-		o.setNome(txtNome.getText());
-		o.setAutor(txtAutor.getText());
-		o.setDisponivel(txtDisponivel.getText());
-		o.setTipo(txtTipo.getText());
-		return o;
+	public Exposicao formToExposicao() { 
+		Exposicao exp = new Exposicao();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		exp.setNomeExposicao(txtNomeExposicao.getText());
+		try {
+			exp.setDataInicio(sdf.parse(txtDataInicio.getText()));
+			exp.setDataFim(sdf.parse(txtDataFim.getText()));
+		} catch (ParseException e ){
+			e.printStackTrace();
+		} catch (NumberFormatException e ){
+			e.printStackTrace();
+		}
+		return exp;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if ("Adicionar".equals( cmd ) ) { 
-			controle.adicionar( formToObra() );
+			controle.adicionar( formToExposicao() );
 		} else if ("Pesquisar".equals( cmd ) ) {
-			List<Obra> lista = controle.pesquisar( txtNome.getText());
+			List<Exposicao> lista = controle.pesquisar( txtNomeExposicao.getText());
 			if (lista.size() > 0) { 
-				obraToForm( lista.get(0) );
+				exposicaoToForm( lista.get(0) );
 			}
 		}
 		
@@ -94,7 +95,8 @@ public class ObraForm implements ActionListener {
 	
 	
 	public static void main(String[] args) {
-		new ObraForm();
+		new ExposicaoForm();
 	}
+
 
 }

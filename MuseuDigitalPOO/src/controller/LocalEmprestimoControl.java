@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import dao.LocalEmprestimoDAO;
 import dao.LocalEmprestimoDAOImpl;
 import entity.LocalEmprestimo;
@@ -11,6 +13,10 @@ public class LocalEmprestimoControl {
 		
 		public void adicionar (LocalEmprestimo l){
 			lDao.adicionar(l);
+		}
+		
+		public List<LocalEmprestimo> pesquisar (String nome){
+			return lDao.pesquisar(nome);
 		}
 
 }

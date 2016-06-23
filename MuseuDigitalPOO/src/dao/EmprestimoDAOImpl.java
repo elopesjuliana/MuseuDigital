@@ -1,11 +1,16 @@
 package dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
 import entity.Emprestimo;
+import entity.Exposicao;
 
 public class EmprestimoDAOImpl implements EmprestimoDAO {
 
@@ -38,5 +43,35 @@ public class EmprestimoDAOImpl implements EmprestimoDAO {
 
 		
 	}
+
+	@Override
+	public List<Emprestimo> pesquisar(String nome) {
+		List <Emprestimo> lista = new ArrayList<Emprestimo>();
+		Connection con = (Connection) JDBCUtil.getInstancia().openConnection();
+		String sql = "SELECT localObraEmprestimo, obraEmprestimo, dataEmprestimo, dataDevolucao FROM Emprestimo WHERE obraEmprestimo LIKE ?";
+		try {
+			System.out.println("Pesquisando...");
+			PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
+			st.setString(1, "%" + nome + "%");
+			
+			ResultSet rs = st.executeQuery();
+			while (rs.next()){
+				Emprestimo emp = new Emprestimo ();
+				
+				emp.setLocalObraEmprestimo(rs.getString("localObraEmprestimo"));
+				emp.setObraEmprestimo(rs.getString("obraEmprestimo"));
+				emp.setDataEmprestimo(rs.getDate("dataEmprestimo"));
+				emp.setDataEmprestimo(rs.getDate("dataDevolucao"));
+			
+				lista.add(emp);
+
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		JDBCUtil.getInstancia().closeConnection();
+		return lista;
+	}
+
 
 }

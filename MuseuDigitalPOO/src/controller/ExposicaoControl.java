@@ -6,6 +6,7 @@ import java.util.List;
 import dao.ExposicaoDAO;
 import dao.ExposicaoDAOImpl;
 import entity.Exposicao;
+import entity.LocalEmprestimo;
 import entity.Obra;
 
 public class ExposicaoControl {

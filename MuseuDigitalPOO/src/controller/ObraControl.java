@@ -3,6 +3,9 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
+
 import dao.ObraDAO;
 import dao.ObraDAOImpl;
 import entity.Obra;
@@ -16,8 +19,9 @@ public class ObraControl {
 		oDao.adicionar(o);
 	}
 	
-	public List<Obra> pesquisar (String nome){
+	public List <Obra> pesquisar (String nome){
 		return oDao.pesquisar(nome);
 	}
+
 
 }

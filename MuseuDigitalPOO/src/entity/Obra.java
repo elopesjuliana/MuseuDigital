@@ -7,8 +7,8 @@ public class Obra {
 	private int idObra;
 	private String nome;
 	private String autor;
-	private boolean disponivel;
-	private int tipo;
+	private String disponivel;
+	private String tipo;
 	
 	public int getIdObra() {
 		return idObra;
@@ -28,16 +28,16 @@ public class Obra {
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
-	public boolean isDisponivel() {
+	public String getDisponivel() {
 		return disponivel;
 	}
-	public void setDisponivel(boolean disponivel) {
+	public void setDisponivel(String disponivel) {
 		this.disponivel = disponivel;
 	}
-	public int getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
-	public void setTipo(int tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 	@Override
