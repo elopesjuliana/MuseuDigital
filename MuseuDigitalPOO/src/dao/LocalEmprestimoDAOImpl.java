@@ -20,7 +20,6 @@ public class LocalEmprestimoDAOImpl implements LocalEmprestimoDAO {
 		
 		try {
 			PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
-			//st.setInt(1, l.getIdObra());
 			st.setString(1, l.getNome());
 			st.setString(2, l.getNomeResponsavel());
 			st.setString(3, l.getTel());

@@ -48,7 +48,6 @@ public class ExposicaoDAOImpl implements ExposicaoDAO {
 		Connection con = (Connection) JDBCUtil.getInstancia().openConnection();
 		String sql = "SELECT nomeExposicao, dataInicio, dataFim FROM Exposicao WHERE nomeExposicao LIKE ?";
 		try {
-			System.out.println("Pesquisando...");
 			PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
 			st.setString(1, "%" + nome + "%");
 			

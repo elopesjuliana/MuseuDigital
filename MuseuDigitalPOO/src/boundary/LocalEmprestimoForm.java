@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -42,7 +43,7 @@ public class LocalEmprestimoForm implements ActionListener {
 	
 	public LocalEmprestimoForm() { 
 		JPanel panPrincipal = new JPanel( new BorderLayout() );
-		JPanel panForm = new JPanel( new GridLayout(6, 2) );
+		JPanel panForm = new JPanel( new GridLayout(20, 2) );
 		JScrollPane panTabela = new JScrollPane( );
 		
 		janela.setContentPane( panPrincipal );
@@ -77,7 +78,7 @@ public class LocalEmprestimoForm implements ActionListener {
 		btnAdicionar.addActionListener( this );
 		btnPesquisar.addActionListener( this );
 		
-		janela.setSize(650, 200);
+		janela.setSize(400, 400);
 		janela.setVisible( true );
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -119,6 +120,7 @@ public class LocalEmprestimoForm implements ActionListener {
 		String cmd = e.getActionCommand();
 		if ("Adicionar".equals( cmd ) ) { 
 			controle.adicionar( formToLocalEmp() );
+			JOptionPane.showMessageDialog(null,"Local de Empréstimo adicionado com sucesso!");
 		} else if ("Pesquisar".equals( cmd ) ) {
 			List<LocalEmprestimo> lista = controle.pesquisar( txtNomeLocal.getText());
 			if (lista.size() > 0) { 

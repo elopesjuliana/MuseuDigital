@@ -24,9 +24,7 @@ public class EmprestimoDAOImpl implements EmprestimoDAO {
 		System.out.println(sql);
 		
 		try {
-			System.out.println("adicionando");
 			PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
-			//st.setInt(1, o.getIdObra());
 			st.setString(1, emp.getLocalObraEmprestimo());
 			st.setString(2, emp.getObraEmprestimo());
 			java.sql.Date d = new java.sql.Date(emp.getDataEmprestimo().getTime());
@@ -50,7 +48,6 @@ public class EmprestimoDAOImpl implements EmprestimoDAO {
 		Connection con = (Connection) JDBCUtil.getInstancia().openConnection();
 		String sql = "SELECT localObraEmprestimo, obraEmprestimo, dataEmprestimo, dataDevolucao FROM Emprestimo WHERE obraEmprestimo LIKE ?";
 		try {
-			System.out.println("Pesquisando...");
 			PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
 			st.setString(1, "%" + nome + "%");
 			

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -83,6 +84,7 @@ public class ObraForm implements ActionListener {
 		String cmd = e.getActionCommand();
 		if ("Adicionar".equals( cmd ) ) { 
 			controle.adicionar( formToObra() );
+			 JOptionPane.showMessageDialog(null,"Obra adicionada com sucesso!");
 		} else if ("Pesquisar".equals( cmd ) ) {
 			List<Obra> lista = controle.pesquisar( txtNome.getText());
 			if (lista.size() > 0) { 

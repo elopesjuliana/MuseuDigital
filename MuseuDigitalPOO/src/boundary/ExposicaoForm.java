@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -84,6 +85,7 @@ public class ExposicaoForm implements ActionListener {
 		String cmd = e.getActionCommand();
 		if ("Adicionar".equals( cmd ) ) { 
 			controle.adicionar( formToExposicao() );
+			JOptionPane.showMessageDialog(null,"Exposição adicionada com sucesso!");
 		} else if ("Pesquisar".equals( cmd ) ) {
 			List<Exposicao> lista = controle.pesquisar( txtNomeExposicao.getText());
 			if (lista.size() > 0) { 

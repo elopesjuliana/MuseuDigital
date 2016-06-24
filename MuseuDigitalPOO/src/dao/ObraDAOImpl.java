@@ -20,15 +20,12 @@ public class ObraDAOImpl implements ObraDAO {
 	@Override
 	public void adicionar(Obra o) {
 		Connection con = JDBCUtil.getInstancia().openConnection();
-		System.out.println("conexão: " + con);
 		System.out.println("vamos adicionar a obra");
 		String sql = "INSERT INTO Obra (nome, autor, disponivel, tipo) " +
 					 " VALUES (?, ?, ?, ?) ";
 		
 		try {
-			//System.out.println("Adicionando obra... ");
 			PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
-			//st.setInt(1, o.getIdObra());
 			st.setString(1, o.getNome());
 			st.setString(2, o.getAutor());
 			st.setString(3, o.getDisponivel());

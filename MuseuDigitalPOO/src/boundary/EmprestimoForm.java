@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -89,6 +90,7 @@ public class EmprestimoForm implements ActionListener{
 		String cmd = e.getActionCommand();
 		if ("Adicionar".equals( cmd ) ) { 
 			controle.adicionar( formToEmprestimo() );
+			JOptionPane.showMessageDialog(null,"Empréstimo adicionado com sucesso!");
 		} else if ("Pesquisar".equals( cmd ) ) {
 			List<Emprestimo> lista = controle.pesquisar( txtObra.getText() );
 			if (lista.size() > 0) { 
